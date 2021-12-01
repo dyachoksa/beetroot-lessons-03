@@ -3,6 +3,9 @@ class Animal:
         self.age = age
         self.name = None
 
+    def __del__(self):
+        print("Deleting instance:", repr(self))
+
     def __str__(self):
         return self.name
 
@@ -54,6 +57,9 @@ print("Cat instance:", repr(cat))
 print("Cat's name:", cat)
 # or
 # print("Cat's name:", str(cat))
+
+# we don't need 'cat' anymore
+# del cat
 
 cat1 = Cat(age=2)
 cat1.set_name("Kitty")
