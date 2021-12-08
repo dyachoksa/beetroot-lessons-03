@@ -43,4 +43,35 @@ def waste_some_time(num_times):
 
 waste_some_time(10)
 waste_some_time(100)
-waste_some_time(1_000)
+# waste_some_time(1_000)
+
+
+### Decorator as validator
+def validate(max_length=10, min_length=1):
+    def inner(func):
+        def wrapper(value, *args, **kwargs):
+            if len(value) > max_length:
+                raise ValueError("First argument of the '{}' function should be less then {} chars, but {} got.".format(
+                    func.__name__,
+                    max_length,
+                    len(value),
+                ))
+
+            if len(value) < min_length:
+                raise ValueError("First argument of the '{}' function should be greater then {} char(s), but {} got.".format(
+                    func.__name__,
+                    min_length,
+                    len(value),
+                ))
+
+            return func(value, *args, **kwargs)
+        return wrapper
+    return inner
+
+@validate(max_length=10, min_length=5)
+def greet(name):
+    print("Welcome, to the Python World, {name}!".format(name=name))
+
+greet("Sergey")
+# greet("JavaScript Master")
+greet("ME")
