@@ -1,14 +1,17 @@
+import typing
+
+
 class Database:
     def __init__(self, uri: str) -> None:
         self.uri = uri
         self.openned = False
 
-    def __enter__(self):
+    def __enter__(self) -> "Database":
         self.open()
 
         return self
 
-    def __exit__(self, exc_type, exc_value, traceback) -> bool:
+    def __exit__(self, exc_type, exc_value, traceback) -> typing.Literal[False]:
         self.close()
 
         # print(exc_type)
@@ -16,9 +19,11 @@ class Database:
 
         return False
 
-    def open(self):
+    def open(self) -> bool:
         print("Opennig database connection to {}...".format(self.uri))
         self.openned = True
+
+        return True
     
     def close(self):
         print("Closing database connection...")
@@ -35,7 +40,8 @@ class Database:
 # db = Database("postgresql://localhost/app")
 
 # # Open connection to database
-# db.open()
+# if db.open():
+#     print("Database connected")
 
 # # Do some queries
 # db.query("selecting users")
