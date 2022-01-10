@@ -1,4 +1,5 @@
 import json
+import uuid
 
 from PyQt6.sip import delete
 
@@ -30,6 +31,12 @@ class ContactsService:
                 return contact
         
         return None
+
+    def create(self, contact):
+        contact["id"] = str(uuid.uuid4())
+        self.contacts.append(contact)
+
+        self.save()
 
     def update(self, contact):
         for contact_to_update in self.contacts:

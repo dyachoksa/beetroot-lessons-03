@@ -5,5 +5,12 @@
     "email": "kirk.james@example.com",
     "address": "9012 Walnut Hill Ln",
     "notes": "Mobile: `(139)-249-2194`\n\n"
+  },
+  {
+    "name": "Brittany Oliver",
+    "email": "brittany.oliver@example.com",
+    "address": "3760 Lovers Ln",
+    "notes": "DoB: 4/5/1963\n\n",
+    "id": "8b4d28e0-1028-42be-a9c0-22751e895ed5"
   }
 ]
