@@ -1,6 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import time
 import threading
+import os
 
 
 def time_it(func):
@@ -21,6 +22,7 @@ def time_it(func):
 def task1():
     print("Executing task 1...")
     print("Thread 1 ID:", threading.get_native_id())
+    print("Thread 1 process ID:", os.getpid())
     
     time.sleep(2)
 
@@ -31,6 +33,7 @@ def task1():
 def task2():
     print("Executing task 2...")
     print("Thread 2 ID:", threading.get_native_id())
+    print("Thread 1 process ID:", os.getpid())
     
     time.sleep(1)
 
@@ -41,6 +44,7 @@ def task2():
 def task3():
     print("Executing task 3...")
     print("Thread 3 ID:", threading.get_native_id())
+    print("Thread 1 process ID:", os.getpid())
     
     time.sleep(2)
 
@@ -50,6 +54,7 @@ def task3():
 @time_it
 def main():
     print("Main thread ID:", threading.get_native_id())
+    print("Main thread process ID:", os.getpid())
 
     # task1()
     # task2()
@@ -71,23 +76,23 @@ def main():
     # task3_thread.join()
 
     # Threaded version 2
-    # tasks = [task1, task2, task3]
-    # threads = []
+    tasks = [task1, task2, task3]
+    threads = []
 
-    # for task in tasks:
-    #     thread = threading.Thread(target=task)
-    #     thread.start()
-    #     threads.append(thread)
+    for task in tasks:
+        thread = threading.Thread(target=task)
+        thread.start()
+        threads.append(thread)
 
-    # for thread in threads:
-    #     thread.join()
+    for thread in threads:
+        thread.join()
 
     # Threaded version 3
-    tasks = [task1, task2, task3, task2, task1, task3, task2]
+    # tasks = [task1, task2, task3, task2, task1, task3, task2]
 
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        for task in tasks:
-            executor.submit(task)
+    # with ThreadPoolExecutor(max_workers=3) as executor:
+    #     for task in tasks:
+    #         executor.submit(task)
 
     print("Finished main")
 
