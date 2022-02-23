@@ -1,0 +1,9 @@
+sqlalchemy
+passlib
+
+flask
+flask-login
+flask-sqlalchemy
+flask-migrate
+flask-wtf
+bootstrap-flask
