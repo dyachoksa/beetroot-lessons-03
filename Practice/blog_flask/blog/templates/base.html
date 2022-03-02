@@ -1,3 +1,4 @@
+{% from 'bootstrap5/utils.html' import render_messages %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,6 +41,8 @@
     {% include 'partials/header.html' %}
 
     <main class="flex-grow-1 container">
+        {{ render_messages() }}
+
         {% block content %}{% endblock %}
     </main>
 

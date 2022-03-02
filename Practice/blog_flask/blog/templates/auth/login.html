@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <h1>Log in</h1>
+            <p>Please login in order to continue</p>
+
+            {% if error %}
+                <div class="mt-1 alert alert-warning" role="alert">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <hr>
+
+            {{ render_form(form) }}
+        </div>
+    </div>
+{% endblock %}

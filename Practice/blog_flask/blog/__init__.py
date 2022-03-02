@@ -8,6 +8,7 @@ from .views import register_views
 def create_app():
     app = Flask(__name__)
 
+    app.config['SECRET_KEY'] = 'ChangeMe!'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 

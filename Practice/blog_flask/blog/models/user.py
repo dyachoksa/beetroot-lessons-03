@@ -1,11 +1,13 @@
 import datetime as dt
 
+from passlib.hash import pbkdf2_sha256
 from sqlalchemy import func
+from flask_login import UserMixin
 
 from blog.extensions import db
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -25,3 +27,9 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User id={} name={} email={}>".format(self.id, self.name, self.email)
+
+    def hash_password(self, password: str):
+        self.password_hash = pbkdf2_sha256.hash(password)
+
+    def verify_password(self, password: str):
+        return pbkdf2_sha256.verify(password, self.password_hash)

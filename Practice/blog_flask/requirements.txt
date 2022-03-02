@@ -1,5 +1,6 @@
 sqlalchemy
 passlib
+email_validator
 
 flask
 flask-login
