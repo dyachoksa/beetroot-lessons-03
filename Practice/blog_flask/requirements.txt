@@ -1,6 +1,7 @@
 sqlalchemy
 passlib
 email_validator
+python-slugify
 
 flask
 flask-login
