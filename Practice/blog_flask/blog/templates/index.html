@@ -1,5 +1,22 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome to the BeetBlog!</h1>
+    <section class="bg-light rounded-3 py-5 px-4 text-center">
+        <h1>Welcome to the BeetBlog!</h1>
+        <p>Ultrices eius magni massa non, nisi pariatur nobis eiusmod, sapien, pulvinar posuere nunc praesentium etiam?</p>
+    </section>
+
+    <section class="mt-5">
+        <div class="d-flex justify-content-between">
+            <h2>Recent posts</h2>
+
+            <a href="{{ url_for('posts.index') }}">Read all</a>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for post in latest_posts %}
+                {% include "posts/_short_post.html" %}
+            {% endfor %}
+        </div>
+    </section>
 {% endblock %}

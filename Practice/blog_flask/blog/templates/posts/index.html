@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if term %}
+        <h1>Search results for <em>{{ term }}</em></h1>
+    {% else %}
+        <h1>Our Posts</h1>
+    {% endif %}
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for post in posts %}
+            {% include "posts/_short_post.html" %}
+        {% endfor %}
+    </div>
+{% endblock %}

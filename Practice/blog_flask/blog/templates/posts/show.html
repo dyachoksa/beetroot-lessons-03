@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>{{ post.title }} <small class="text-muted">by {{ post.user.name }}</small></h1>
+
+    {% if post.published_at %}
+        <p class="fst-italic">Posted at: {{ post.published_at }}</p>
+    {% else %}
+        <p class="text-warning">Draft</p>
+    {% endif %}
+
+    <div>
+        {% if post.image_url %}
+            <div class="float-start me-4" style="max-width: 40rem;">
+                <img class="rounded img-fluid" src="{{ post.image_url }}" alt="{{ post.title }}" />
+            </div>
+        {% endif %}
+
+        {{ post.content | safe }}
+    </div>
+
+    {% if current_user.is_authenticated %}
+        <div>
+            <a href="{{ url_for('posts.edit', slug=post.slug) }}" class="btn btn-secondary">Edit post</a>
+        </div>
+    {% endif %}
+{% endblock %}

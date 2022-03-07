@@ -11,6 +11,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'ChangeMe!'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_ECHO'] = True
 
     bootstrap.init_app(app)
     db.init_app(app)
