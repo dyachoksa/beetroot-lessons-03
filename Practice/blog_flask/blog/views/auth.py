@@ -1,14 +1,17 @@
 from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_user, logout_user, login_required
 
+from blog.extensions import db
 from blog.forms import RegistrationForm, LoginForm
 from blog.models import User
-from blog.extensions import db
+from blog.tasks import send_welcome_email
+from blog.utils import time_it
 
 auth = Blueprint("auth", __name__)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
+@time_it
 def register():
     form = RegistrationForm()
 
@@ -22,6 +25,8 @@ def register():
 
         db.session.add(user)
         db.session.commit()
+
+        send_welcome_email(user)
 
         flash('Registration has been successful. Now you can login.', 'success')
 

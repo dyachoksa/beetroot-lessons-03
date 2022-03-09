@@ -2,10 +2,12 @@ sqlalchemy
 passlib
 email_validator
 python-slugify
+python-dotenv
 
 flask
 flask-login
 flask-sqlalchemy
 flask-migrate
 flask-wtf
+flask-mail
 bootstrap-flask
