@@ -10,7 +10,7 @@
         <p class="text-warning">Draft</p>
     {% endif %}
 
-    <div>
+    <div class="clearfix">
         {% if post.image_url %}
             <div class="float-start me-4" style="max-width: 40rem;">
                 <img class="rounded img-fluid" src="{{ post.image_url }}" alt="{{ post.title }}" />
@@ -21,7 +21,7 @@
     </div>
 
     {% if current_user.is_authenticated %}
-        <div>
+        <div class="mt-4">
             <a href="{{ url_for('posts.edit', slug=post.slug) }}" class="btn btn-secondary">Edit post</a>
         </div>
     {% endif %}

@@ -4,5 +4,5 @@ from wtforms.validators import DataRequired, Length
 
 
 class CommentForm(FlaskForm):
-    message = TextAreaField('Post content', validators=[DataRequired(), Length(min=10, max=600)], render_kw={'rows': 3})
+    message = TextAreaField('Your message', validators=[DataRequired(), Length(min=10, max=600)], render_kw={'rows': 3})
     submit = SubmitField('Add comment')

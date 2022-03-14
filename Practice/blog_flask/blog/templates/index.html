@@ -22,7 +22,7 @@
 
     <section class="mt-5">
         <div class="row">
-            <div class="col-12 col-md-9">
+            <div class="col-12 col-md-8">
                 <h3>Latest comments</h3>
 
                 {% for comment in latest_comments %}
@@ -39,7 +39,36 @@
                 {% endfor %}
             </div>
 
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-4">
+                <img class="img-fluid rounded" src="{{ url_for('static', filename='images/banner-01.jpg') }}" alt="Banner" />
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-5 bg-light rounded-3 py-5 px-4">
+        <h4>Subscribe to our newsletter!</h4>
+        <form action="." class="d-flex gap-2">
+            <label for="subscribeEmail" class="col-form-label">
+                Torquent posuere mus eum. Reprehenderit convallis quam commodo? Magni quod autem, facilisi rhoncus
+                ratione porta, quasi. Voluptatibus, cras ipsum mus nonummy?
+            </label>
+            <div class="w-50">
+                <input type="email" name="email" class="form-control" id="subscribeEmail" />
+            </div>
+            <div>
+                <button type="submit" class="btn btn-info">Subscribe</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="mt-5">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <img class="img-fluid rounded" src="{{ url_for('static', filename='images/banner-01.jpg') }}" alt="Banner" />
+            </div>
+
+            <div class="col-12 col-md-8">
+                <h3>Most popular posts</h3>
             </div>
         </div>
     </section>
