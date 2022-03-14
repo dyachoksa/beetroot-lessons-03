@@ -5,13 +5,11 @@ from blog.extensions import db
 from blog.forms import RegistrationForm, LoginForm
 from blog.models import User
 from blog.tasks import send_welcome_email
-from blog.utils import time_it
 
 auth = Blueprint("auth", __name__)
 
 
 @auth.route('/register', methods=['GET', 'POST'])
-@time_it
 def register():
     form = RegistrationForm()
 
@@ -26,7 +24,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        send_welcome_email(user)
+        send_welcome_email.delay(user.id)
 
         flash('Registration has been successful. Now you can login.', 'success')
 

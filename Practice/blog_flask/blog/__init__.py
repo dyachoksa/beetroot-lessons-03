@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 
+from .celery import init_celery
 from .extensions import bootstrap, db, migrate, mail
 from .security import login_manager
 from .views import register_views
@@ -24,6 +25,11 @@ def create_app():
     app.config['MAIL_USE_TLS'] = True
     app.config['MAIL_USE_SSL'] = False
     app.config['MAIL_DEBUG'] = False
+
+    app.config['broker_url'] = 'redis://127.0.0.1:6379/5'
+    app.config['result_backend'] = 'redis://127.0.0.1:6379/6'
+
+    init_celery(app)
 
     bootstrap.init_app(app)
     db.init_app(app)

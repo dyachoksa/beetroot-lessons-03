@@ -3,6 +3,8 @@ passlib
 email_validator
 python-slugify
 python-dotenv
+celery
+redis
 
 flask
 flask-login
