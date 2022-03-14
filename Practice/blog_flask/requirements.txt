@@ -5,6 +5,7 @@ python-slugify
 python-dotenv
 celery
 redis
+libgravatar
 
 flask
 flask-login

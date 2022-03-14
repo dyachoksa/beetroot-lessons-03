@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-from blog.models import Post
+from blog.models import Post, Comment
 
 pages = Blueprint("pages", __name__)
 
@@ -12,4 +12,10 @@ def index():
         .limit(3)\
         .all()
 
-    return render_template("index.html", latest_posts=latest_posts)
+    latest_comments = Comment.query.order_by(Comment.created_at.desc()).limit(5).all()
+
+    return render_template(
+        "index.html",
+        latest_posts=latest_posts,
+        latest_comments=latest_comments
+    )

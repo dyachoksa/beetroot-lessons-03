@@ -15,7 +15,7 @@
 
         <div class="card-footer">
             {% if post.published_at %}
-                <small class="text-muted">Posted {{ post.published_at }}</small>
+                <small class="text-muted">Posted {{ post.published_at.strftime("%A, %b %d, %Y %H:%M") }}</small>
             {% else %}
                 <small class="text-warning">Draft</small>
             {% endif %}

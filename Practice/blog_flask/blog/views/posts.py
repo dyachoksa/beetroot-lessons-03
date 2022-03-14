@@ -2,8 +2,8 @@ from flask import Blueprint, render_template, redirect, url_for, flash, Markup, 
 from flask_login import current_user, login_required
 from slugify import slugify
 
-from blog.forms import PostForm
-from blog.models import Post
+from blog.forms import CommentForm, PostForm
+from blog.models import Post, Comment
 from blog.extensions import db
 
 posts = Blueprint('posts', __name__)
@@ -64,10 +64,26 @@ def create():
     return render_template('posts/create.html', form=form)
 
 
-@posts.get("/<slug>")
+@posts.route("/<slug>", methods=['GET', 'POST'])
 def show(slug):
     obj = Post.query.filter_by(slug=slug).first_or_404()
-    return render_template('posts/show.html', slug=slug, post=obj)
+
+    comment_form = CommentForm()
+    if current_user.is_authenticated and comment_form.validate_on_submit():
+        comment = Comment(
+            user_id=current_user.id,
+            post_id=obj.id,
+            message=comment_form.message.data,
+        )
+
+        db.session.add(comment)
+        db.session.commit()
+
+        flash(Markup(f"Thank you for your comment!"), 'success')
+
+        return redirect(url_for('posts.show', slug=obj.slug))
+
+    return render_template('posts/show.html', slug=slug, post=obj, comment_form=comment_form)
 
 
 @posts.route("/<slug>/edit", methods=['GET', 'POST'])

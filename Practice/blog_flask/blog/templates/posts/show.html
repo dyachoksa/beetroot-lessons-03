@@ -1,10 +1,11 @@
 {% extends "base.html" %}
+{% from "bootstrap5/form.html" import render_form %}
 
 {% block content %}
     <h1>{{ post.title }} <small class="text-muted">by {{ post.user.name }}</small></h1>
 
     {% if post.published_at %}
-        <p class="fst-italic">Posted at: {{ post.published_at }}</p>
+        <p class="fst-italic">Posted at: {{ post.published_at.strftime("%A, %b %d, %Y %H:%M") }}</p>
     {% else %}
         <p class="text-warning">Draft</p>
     {% endif %}
@@ -24,4 +25,32 @@
             <a href="{{ url_for('posts.edit', slug=post.slug) }}" class="btn btn-secondary">Edit post</a>
         </div>
     {% endif %}
+
+    <hr>
+
+    <section>
+        <h3>Comments ({{ post.comments | length }})</h3>
+    
+        {% if current_user.is_authenticated %}
+            <div class="">
+                {{ render_form(comment_form) }}
+            </div>
+        {% endif %} 
+
+        {% if post.comments | length > 0 %}
+            {% for comment in post.comments %}
+                <div class="mt-4 d-flex">
+                    <div class="flex-shrink-0">
+                        <img class="img-thumbnail" src="{{ comment.user.gravatar_url }}" alt="{{ comment.user.name }}" />
+                    </div>
+                    <div class="flex-grow-1 ms-3">
+                        <div class="text-muted">{{ comment.created_at.strftime("%A, %b %d, %Y %H:%M") }}, by <em>{{ comment.user.name }}</em></div>
+                        <div class="mt-1">{{ comment.message }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="mt-4 text-muted">No comments currently</p>
+        {% endif %}
+    </section>
 {% endblock %}

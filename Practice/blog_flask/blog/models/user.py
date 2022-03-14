@@ -1,5 +1,6 @@
 import datetime as dt
 
+from libgravatar import Gravatar
 from passlib.hash import pbkdf2_sha256
 from sqlalchemy import func
 from flask_login import UserMixin
@@ -21,12 +22,18 @@ class User(UserMixin, db.Model):
 
     profile = db.relationship("Profile", uselist=False, back_populates="user")
     posts = db.relationship("Post", back_populates="user")
+    comments = db.relationship("Comment", back_populates="user")
 
     def __str__(self):
         return self.name
 
     def __repr__(self):
         return "<User id={} name={} email={}>".format(self.id, self.name, self.email)
+
+    @property
+    def gravatar_url(self):
+        g = Gravatar(self.email)
+        return g.get_image(default="identicon")
 
     def hash_password(self, password: str):
         self.password_hash = pbkdf2_sha256.hash(password)
