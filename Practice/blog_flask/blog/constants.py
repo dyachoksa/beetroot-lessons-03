@@ -1,0 +1,1 @@
+NEWSLETTER_WEEKLY = "weekly"

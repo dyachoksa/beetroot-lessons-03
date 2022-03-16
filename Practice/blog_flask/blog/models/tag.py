@@ -13,7 +13,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     slug = db.Column(db.String, nullable=False, unique=True)
-    created_at =db.Column(
+    created_at = db.Column(
         db.DateTime, nullable=False, default=dt.datetime.utcnow, server_default=func.current_timestamp()
     )
     updated_at = db.Column(db.DateTime, default=dt.datetime.utcnow, onupdate=dt.datetime.utcnow)

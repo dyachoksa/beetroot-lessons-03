@@ -1,0 +1,5 @@
+Welcome! Our weekly update is here!
+
+{% for post in posts %}
+    {{ post.title }}
+{% endfor %}

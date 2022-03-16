@@ -3,7 +3,7 @@ import os
 from flask import Flask
 
 from .celery import init_celery
-from .extensions import bootstrap, db, migrate, mail
+from .extensions import bootstrap, db, migrate, mail, csrf
 from .security import login_manager
 from .views import register_views
 
@@ -12,6 +12,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['SECRET_KEY'] = 'ChangeMe!'
+    app.config['SERVER_NAME'] = '127.0.0.1:5000'
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -36,6 +37,7 @@ def create_app():
     migrate.init_app(app, db)
     login_manager.init_app(app)
     mail.init_app(app)
+    csrf.init_app(app)
 
     register_views(app)
 
