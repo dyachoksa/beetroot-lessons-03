@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}{{ gallery.name }}{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container">
+            <h1 class="title">{{ gallery.name }}</h1>
+
+            {% if gallery.description %}
+                <p>{{ gallery.description }}</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="columns is-multiline">
+            {% for gallery_image in gallery.images.all %}
+                <div class="column is-2-tablet is-4-desktop">
+                    <a href="{{ gallery_image.image.url }}" target="_blank">
+                        <img src="{{ gallery_image.image_preview.url }}" alt="{{ gallery_image.title }}" />
+                    </a>
+                    {% if gallery_image.title %}
+                        <h2 class="title is-5">{{ gallery_image.title }}</h2>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

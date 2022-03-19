@@ -1,0 +1,11 @@
+{% if messages %}
+    <section class="section py-2">
+        <div class="container" style="width: 100%;">
+            {% for message in messages %}
+                <div class="notification is-info is-light">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}

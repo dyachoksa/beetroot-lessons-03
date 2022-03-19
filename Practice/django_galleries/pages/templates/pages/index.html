@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section class="hero is-medium is-primary" style="margin-top: 32px;">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Welcome to the Galleries!
+                </h1>
+                <h2 class="subtitle">
+                    Praesentium voluptate eiusmod, justo cursus cupiditate aliquid ratione anim.
+                </h2>
+
+                <p>
+                    Nihil luctus mollit. Vulputate laborum fugiat voluptates egestas? Architecto natus, ipsum asperiores
+                    amet. Lacus bibendum deleniti, senectus saepe! Impedit, cubilia tortor, temporibus placerat, ea,
+                    tenetur expedita! Nunc deserunt.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="title is-4">Latest galleries</h2>
+
+            <div class="columns">
+                {% for gallery in latest_galleries %}
+                    <div class="column is-4-tablet">
+                        <a href="{{ gallery.get_absolute_url }}">
+                            <img src="{{ gallery.main_image.image_preview.url }}" alt="{{ gallery.name }}" />
+                        </a>
+                        <h2 class="title is-5">{{ gallery.name }}</h2>
+                        <h3 class="subtitle is-6">By {{ gallery.user }}</h3>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
