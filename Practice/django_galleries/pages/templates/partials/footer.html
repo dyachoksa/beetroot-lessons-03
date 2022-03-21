@@ -1,7 +1,14 @@
+{% load flatpages %}
 <footer class="footer">
     <div class="container">
         <div class="content has-text-centered">
-            &copy; 2022, The Galleries Team.
+            <p>&copy; 2022, The Galleries Team.</p>
+            <p>
+                {% get_flatpages as flatpages %}
+                {% for page in flatpages %}
+                    <a href="/pages{{ page.url }}">{{ page.title }}</a>{% if not forloop.last %} | {% endif %}
+                {% endfor %}
+            </p>
         </div>
     </div>
 </footer>

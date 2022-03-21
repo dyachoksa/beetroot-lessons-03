@@ -40,6 +40,11 @@
                             <a href="{% url 'account_change_password' %}" class="navbar-item">
                                 Change password
                             </a>
+                            {% if request.user.is_staff or request.user.is_superuser %}
+                                <a href="{% url 'admin:index' %}" class="navbar-item">
+                                    Admin portal
+                                </a>
+                            {% endif %}
                             <hr class="navbar-divider">
                             <a href="{% url 'account_logout' %}" class="navbar-item">
                                 Log out

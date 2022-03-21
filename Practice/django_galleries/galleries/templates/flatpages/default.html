@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ flatpage.title }}{% endblock %}
+
+{% block content %}
+    <section class="section">
+        <div class="container is-max-desktop">
+            <h1 class="title">{{ flatpage.title }}</h1>
+        </div>
+    </section>
+
+    <div class="container is-max-desktop">
+        <div class="content">
+            {{ flatpage.content }}
+        </div>
+    </div>
+{% endblock %}
